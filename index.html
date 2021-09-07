@@ -15,29 +15,33 @@
     }
     textarea {
       width: 100%;
+      min-height: 100px;
     }
-    pre::before {
-      content: "check result";
-      border: 1px solid white;
-      position: absolute;
-      right: 8px;
+    pre {
+      padding-top: 8px;
+    }
+    code {
+      padding-left: 8px;
+      padding-right: 8px;
     }
   </style>
 </head>
 <body>
   <textarea name="lisp" id="lisp" placeholder="Input some lisp code. Such as: (add 2 4) "></textarea>
-  <pre>
-  </pre>
+  <button>Compile Lisp to C ↓</button>
+  <pre><code></code></pre>
 </body>
 <script src="./compiler-lisp2c.js"></script>
 <script>
-  const codeEle = document.querySelector('pre')
-  document.querySelector('#lisp').addEventListener('change', function (e) {
-    if (!e.target.value) return;
-    const input = e.target.value
+  const codeEle = document.querySelector('code')
+  const textareaEle = document.querySelector('textarea')
+  document.querySelector('button').addEventListener('click', function () {
+    const input = textareaEle.value
+    if(!input) return
     try {
         codeEle.innerText = compiler(input)
       } catch (e) {
+        console.log(e)
         codeEle.innerText = e.message
       }
   })

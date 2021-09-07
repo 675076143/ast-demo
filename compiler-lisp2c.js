@@ -128,7 +128,7 @@ function parser(tokens){
       // 上文中CallExpression中已体现name token, 直接跳过
       token = tokens[++current];
       // 递归处理因括号引发的CallExpression
-      while( (token.type !== 'paren') || (token === 'paren' && token !==')') ){
+      while( (token.type !== 'paren') || (token.type === 'paren' && token.value !==')') ){
         node.params.push(walk())
         token = tokens[current]
       }
@@ -314,7 +314,7 @@ function codeGenerator(node){
       return `${codeGenerator(node.expression)};`
     case 'CallExpression':
       // 函数字面量+括号调用参数，多参数使用逗号分割
-      return `${codeGenerator(node.callee)}(${node.arguments.map(codeGenerator).join(',')})`
+      return `${codeGenerator(node.callee)}(${node.arguments.map(codeGenerator).join(', ')})`
     case 'Identifier':
       // 标识符直接返回对应标识符字面量
       return node.name
@@ -341,6 +341,9 @@ function compiler(input){
   let ast = parser(tokens)
   let newAst = transformer(ast)
   let output = codeGenerator(newAst)
+  console.log({
+    tokens, ast, newAst, output
+  })
   return output
 }
 
