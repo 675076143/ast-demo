@@ -344,11 +344,11 @@ function compiler(input){
   return output
 }
 
-module.exports = {
-  tokenizer,
-  parser,
-  traverser,
-  transformer,
-  codeGenerator,
-  compiler,
-};
+// module.exports = {
+//   tokenizer,
+//   parser,
+//   traverser,
+//   transformer,
+//   codeGenerator,
+//   compiler,
+// };

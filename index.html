@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AST-DEMO</title>
+  <style>
+    pre {
+      background-color: black;
+      color: white;
+      min-height: 100px;
+      width: 100%;
+    }
+    textarea {
+      width: 100%;
+    }
+    pre::before {
+      content: "check result";
+      border: 1px solid white;
+      position: absolute;
+      right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <textarea name="lisp" id="lisp" placeholder="Input some lisp code. Such as: (add 2 4) "></textarea>
+  <pre>
+  </pre>
+</body>
+<script src="./compiler-lisp2c.js"></script>
+<script>
+  const codeEle = document.querySelector('pre')
+  document.querySelector('#lisp').addEventListener('change', function (e) {
+    if (!e.target.value) return;
+    const input = e.target.value
+    try {
+        codeEle.innerText = compiler(input)
+      } catch (e) {
+        codeEle.innerText = e.message
+      }
+  })
+
+</script>
+
+</html>
