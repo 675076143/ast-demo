@@ -20,7 +20,7 @@
     pre {
       padding-top: 8px;
     }
-    code {
+    .code {
       padding-left: 8px;
       padding-right: 8px;
     }
@@ -29,11 +29,11 @@
 <body>
   <textarea name="lisp" id="lisp" placeholder="Input some lisp code. Such as: (add 2 4) "></textarea>
   <button>Compile Lisp to C ↓</button>
-  <pre><code></code></pre>
+  <pre><div class="code"></div></pre>
 </body>
 <script src="./compiler-lisp2c.js"></script>
 <script>
-  const codeEle = document.querySelector('code')
+  const codeEle = document.querySelector('.code')
   const textareaEle = document.querySelector('textarea')
   document.querySelector('button').addEventListener('click', function () {
     const input = textareaEle.value
